@@ -1,17 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-button variant="primary" v-if="showForm" @click="closeForm">Show Movies</b-button>
+    <b-button variant="primary" v-else @click="openForm">Add Movie</b-button>
+    <create-movie v-if="showForm"/>
+    <movies-table v-else/>
+    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MoviesTable from './components/MoviesTable.vue'
+import CreateMovie from './components/CreateMovie.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MoviesTable,
+    CreateMovie
+  },
+  data(){
+    return {
+      showForm:false
+    }
+  },
+  methods:{
+    openForm(){
+      this.showForm = true
+    },
+    closeForm(){
+      this.showForm = false
+    }
   }
 }
 </script>
